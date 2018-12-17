@@ -52,6 +52,48 @@ public class Arvore {
 		}
 	}
 	
+	public Arvore remover(Elemento ele) {
+		if(isEmpty()) {
+			return this;
+		}else {
+			if(this.elemento.getElemento() == ele.getElemento()) {
+				//caso simples: o elemento é o nó folha (sem elementos a esquerda ou direita)
+				if(this.left == null && this.right == null) {
+					return null;
+				}else {
+					//caso o elemento da direita nao exista
+					if(this.left != null && this.right == null) {
+						return this.left;
+					}else if(this.right!=null && this.left ==null) {
+						return this.right;
+					}
+					
+					
+					//caso quando o elemento é o nó raiz e possui elementos a esquerda e direita
+					if(this.left != null && this.right !=null && this.elemento.getElemento() == ele.getElemento()) {
+						
+						Arvore aux = this.left;
+						
+						while(aux.right != null) {
+							aux = aux.right;
+						}
+						
+						this.elemento = aux.elemento;
+						aux.elemento = ele;
+						
+						this.left = left.remover(ele);
+					}
+				}
+				
+			}else if(ele.getElemento() < this.elemento.getElemento()) {
+				this.left = this.left.remover(ele);
+			}else if(ele.getElemento() > this.elemento.getElemento()) {
+				this.right = this.right.remover(ele);
+			}
+			return this;
+		}
+	}
+	
 	// default: pre-ordem, 1: in-ordem, 2: pos-ordem e 3: in-ordem invertida
 	public void imprimirArvore(int ordem) {
 		if(!isEmpty()) {
@@ -114,7 +156,7 @@ public class Arvore {
 	}
 	
 	private void imprimirPosOrdem(Arvore a) {
-	if(!a.isEmpty()) {
+		if(!a.isEmpty()) {
 			if(a.right!=null) {
 				imprimirPosOrdem(a.right);
 			}
@@ -126,7 +168,7 @@ public class Arvore {
 	}
 	
 	private void imprimirInOrdemIn(Arvore a) {
-	if(!a.isEmpty()) {
+		if(!a.isEmpty()) {
 			
 			
 			
@@ -148,14 +190,15 @@ public class Arvore {
 	private void calcularNOS(Arvore a) {
 		if(a.isEmpty()) {
 			this.qtdNO += 0;
+		}else {
+			if(a.left !=null) {
+				calcularNOS(a.left);
+			}
+			if(a.right !=null) {
+				calcularNOS(a.right);
+			}
+			this.qtdNO++;
 		}
-		if(a.left !=null) {
-			calcularNOS(a.left);
-		}
-		if(a.right !=null) {
-			calcularNOS(a.right);
-		}
-		this.qtdNO++;
 	}
 	
 	public boolean buscar(int valor) {

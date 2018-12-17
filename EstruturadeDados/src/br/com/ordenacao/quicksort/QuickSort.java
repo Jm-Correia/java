@@ -9,7 +9,7 @@ public class QuickSort {
 		this.vetor = vetor;
 		
 	}
-	
+	//Crescente
 	private int partition(int inicio, int fim) {
 		int ref, down, up, pivo, aux;
 		down = inicio;
@@ -39,6 +39,36 @@ public class QuickSort {
 		return up;
 	}
 	
+	//Decrescente
+	private int partitionDecrescente(int inicio, int fim) {
+		int ref, down, up, pivo, aux;
+		down = inicio;
+		up = fim;
+		ref = vetor[inicio];
+		
+		while(down < up) {
+		
+			
+			while(vetor[down] >= ref && down<fim) {
+				down++;
+			}
+			
+			while(vetor[up] < ref) {
+				up--;
+			}
+			
+			if(down < up) {
+				aux = vetor[up];
+				vetor[up] = vetor[down];
+				vetor[down] = aux;
+			}
+	
+		}
+		vetor[inicio] = vetor[up];
+		vetor[up] = ref;
+		return up;
+	}
+	
 	
 	public void quickSort(int inicio, int fim) {
 		int pivo;
@@ -48,6 +78,16 @@ public class QuickSort {
 		pivo = partition(inicio, fim);
 		quickSort(inicio, pivo-1);
 		quickSort(pivo+1, fim);
+	}
+	
+	public void quickSortDES(int inicio, int fim) {
+		int pivo;
+		if(inicio > fim) {
+			return;
+		}
+		pivo = partitionDecrescente(inicio, fim);
+		quickSortDES(inicio, pivo-1);
+		quickSortDES(pivo+1, fim);
 	}
 	
 	public void imprimirVetor() {

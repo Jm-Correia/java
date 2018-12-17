@@ -11,6 +11,7 @@ public class TesteArvoreBinaria {
 		
 		a.inserir(new Elemento(5));
 		a.inserir(new Elemento(3));
+		a.inserir(new Elemento(8));
 		a.inserir(new Elemento(15));
 		a.inserir(new Elemento(12));
 		
@@ -29,6 +30,10 @@ public class TesteArvoreBinaria {
 		
 		System.out.println("Arvore tem o total de " + a.qtdNo() + " Elementos");
 		System.out.println("O elemento 5 " + (a.buscar(1)? "Existe " : "Não Existe"));
+		
+		a = a.remover(new Elemento(10));
+		
+		a.imprimirArvore(0);
 	}
 
 }

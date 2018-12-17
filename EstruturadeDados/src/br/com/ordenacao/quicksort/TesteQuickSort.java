@@ -16,6 +16,15 @@ public class TesteQuickSort {
 		q.quickSort(0, valores.length-1);
 		q.imprimirVetor();
 		
+		int valoresDes[] = {10,190,80,18965,1,890,176156,600,2,200,300,512,3,4,4,5};//{22,37,45,90,10};
+		
+		QuickSort des = new QuickSort(valoresDes);
+		
+		des.imprimirVetor();
+		des.quickSortDES(0, valoresDes.length-1);
+		des.imprimirVetor();
+		
+		
 	}
 
 }
